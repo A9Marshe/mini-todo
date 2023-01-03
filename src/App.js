@@ -1,30 +1,7 @@
-import { useReducer } from 'react';
 import { TasksList } from './components';
-import tasksReducer from './hooks/TasksReducer';
-
+import './App.css'
 export default function App() {
-  const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
-  let nextId = tasks[-1]?.id;
-  // DISPATCH ACITON HANDLERS
-  function handleAddTask(text) {
-    dispatch({
-      type: 'added',
-      id: nextId++,
-      text: text,
-    })
-  }
-  function handleChangeTask(task) {
-    dispatch({
-      type: 'changed',
-      task: task,
-    })
-  }
-  function handleDeleteTask(taskId) {
-    dispatch({
-      type: 'deleted',
-      id: taskId,
-    });
-  }
+
 
   return (
     <div className='h-screen flex flex-col space-y-2 ' >
@@ -32,7 +9,7 @@ export default function App() {
         hola
       </header>
       <main className=''>
-        <TasksList tasks={tasks} onChangeTask={handleChangeTask} onDeleteTask={handleAddTask} />
+        <TasksList initialTasks={initialTasks} />
       </main>
       <footer className=' w-full  mx-auto text-center p-4'>
         © 2023 lorem ipusm

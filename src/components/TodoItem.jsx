@@ -1,27 +1,56 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
+import { TasksContext } from "../context/TasksContext";
 
-export default function TodoItem({ task, handleDeleteTask, handleChangeTask }) {
+export default function TodoItem({ task }) {
   //original text references the initial task text (or the task before editing)
   const originalText = useRef(task.text);
   //text is the current text task inside input (while editing)
   const [text, setText] = useState(task.text);
-  const [isEditing, setIsEditing] = useState(false);
 
-  function handleEditTask() {
-    text.length < 3
-      ? alert("task cannot be less than 3 letters \\:")
-      : setIsEditing(false);
-    originalText.current = () => text;
-    handleChangeTask({ ...task, text });
+  //this dispatch is from the TasksReducer, provided by the App component using TasksContext
+  const { dispatch } = useContext(TasksContext);
+
+  const [isEditing, setIsEditing] = useState(false);
+  /*
+  a task can be:
+  1: checked/unchecked (done or note) (via handleTaskCheck)
+  2: edited (task name changes) (via handleTaskChange)
+  2.5: a task can be edit but then the changes are ommitted (via undo)
+  3: deleted (task is removed from tasks) (via handleTaskDelete)
+  */
+
+  function handleTaskCheck(updatedTask) {
+    dispatch({ type: "changed", task: updatedTask });
+    console.log(
+      `Task Number ${updatedTask.id} is now set to ${updatedTask.done}`
+    );
   }
+
+  function handleDeleteTask(taskId) {
+    dispatch({
+      type: "deleted",
+      id: taskId,
+    });
+    console.log(`Task Number ${taskId} is now deleted `);
+  }
+
   function undo() {
     console.log(
       `%c${originalText.current}`,
       "background-color:white; color:black; font-size:30px"
     );
     setText(originalText.current);
-    console.log("undoing ", text);
+    console.log(`Task Number ${task.id} is now reset to ${text}`);
     setIsEditing(false);
+  }
+
+  function handleTaskChange() {
+    text.length < 3
+      ? alert("task cannot be less than 3 letters \\:")
+      : setIsEditing(false);
+    originalText.current = text;
+    task.text = text;
+    dispatch({ type: "changed", task: task });
   }
 
   return (
@@ -31,7 +60,7 @@ export default function TodoItem({ task, handleDeleteTask, handleChangeTask }) {
       }`}
     >
       <input
-        onChange={() => handleChangeTask({ ...task, done: !task.done })}
+        onChange={() => handleTaskCheck({ ...task, done: !task.done })}
         type="checkbox"
         className="checkbox-secondary checkbox"
         name="task status"
@@ -55,7 +84,7 @@ export default function TodoItem({ task, handleDeleteTask, handleChangeTask }) {
               />
               <div className="ml-6 flex space-x-1">
                 <button
-                  onClick={handleEditTask}
+                  onClick={() => handleTaskChange()}
                   disabled={task.done ? "disabled" : ""}
                   className="btn-square btn-sm btn border-0 bg-transparent hover:bg-gray-600"
                 >
@@ -79,7 +108,10 @@ export default function TodoItem({ task, handleDeleteTask, handleChangeTask }) {
               </h3>
               <div className="ml-6 flex space-x-1">
                 <button
-                  onClick={() => setIsEditing(true)}
+                  onClick={() => {
+                    setIsEditing(true);
+                    console.log(`you're now editing task with id:${task.id}`);
+                  }}
                   disabled={task.done ? "disabled" : ""}
                   className="btn-square btn-sm btn border-0 bg-transparent hover:bg-gray-600"
                 >

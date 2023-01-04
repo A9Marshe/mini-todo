@@ -1,16 +1,26 @@
 import React, { useRef, useState } from "react";
 
 export default function TodoItem({ task, handleDeleteTask, handleChangeTask }) {
+  //original text references the initial task text (or the task before editing)
   const originalText = useRef(task.text);
-  const [isEditing, setIsEditing] = useState(false);
+  //text is the current text task inside input (while editing)
   const [text, setText] = useState(task.text);
+  const [isEditing, setIsEditing] = useState(false);
 
   function handleEditTask() {
-    setIsEditing(false);
+    (text.length < 3)
+      ? alert("task cannot be less than 3 letters \\:")
+      : setIsEditing(false);
+    originalText.value = () => text;
     handleChangeTask({ ...task, text });
   }
   function undo() {
-    setText(originalText.value);
+    console.log(
+      `%c${originalText.current}`,
+      "background-color:white; color:black; font-size:30px"
+    );
+    setText(originalText.current);
+    console.log("undoing ", text);
     setIsEditing(false);
   }
 

@@ -8,10 +8,10 @@ export default function TodoItem({ task, handleDeleteTask, handleChangeTask }) {
   const [isEditing, setIsEditing] = useState(false);
 
   function handleEditTask() {
-    (text.length < 3)
+    text.length < 3
       ? alert("task cannot be less than 3 letters \\:")
       : setIsEditing(false);
-    originalText.value = () => text;
+    originalText.current = () => text;
     handleChangeTask({ ...task, text });
   }
   function undo() {

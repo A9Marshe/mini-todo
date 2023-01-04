@@ -4,6 +4,8 @@ import tasksReducer from "../hooks/TasksReducer";
 import { useReducer, useRef } from "react";
 
 export default function TasksList({ initialTasks }) {
+  //initialTasks = useContext(tasks);
+
   const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
   const nextId = useRef(3);
   // DISPATCH ACITON HANDLERS
@@ -30,7 +32,7 @@ export default function TasksList({ initialTasks }) {
   }
   return (
     <div className="mx-auto flex h-full max-w-screen-xl flex-col items-center  p-4 ">
-      <NewTask handleAddTask={handleAddTask} />
+      <NewTask handleAddTask={handleAddTask} taskCount={nextId.current} />
       <div className=" flex h-1/2 max-w-screen-lg flex-col items-center">
         {tasks.map((t) => {
           return (

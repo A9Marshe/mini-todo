@@ -56,7 +56,7 @@ export default function TodoItem({ task }) {
   return (
     <div
       className={`flex max-w-[90vw] flex-row items-center ${
-        task.done && "opacity-90 mix-blend-color-dodge"
+        task.done && "opacity-90 "
       }`}
     >
       <input
@@ -68,8 +68,8 @@ export default function TodoItem({ task }) {
         checked={task.done ? "checked" : ""}
         disabled={isEditing ? "disabled" : ""}
       />
-      <article className="m-2 w-[50ch] rounded-md bg-slate-700 p-3">
-        <div className="text- flex flex-row items-center justify-between capitalize">
+      <article className="m-2 w-[50ch] rounded-md bg-primary p-3 text-white">
+        <div className=" flex flex-row items-center justify-between capitalize">
           {isEditing ? (
             <>
               <input
@@ -80,19 +80,19 @@ export default function TodoItem({ task }) {
                 type="text"
                 name=""
                 id=""
-                className="text- input-secondary input max-w-[40ch] overflow-hidden overflow-ellipsis whitespace-nowrap bg-secondary pl-2 text-lg font-semibold"
+                className="input-secondary input max-w-[40ch] overflow-hidden overflow-ellipsis whitespace-nowrap bg-secondary pl-2 text-lg font-semibold"
               />
               <div className="ml-6 flex space-x-1">
                 <button
                   onClick={() => handleTaskChange()}
                   disabled={task.done ? "disabled" : ""}
-                  className="btn-square btn-sm btn border-0 bg-transparent hover:bg-gray-600"
+                  className="btn-square btn-sm btn border-0 bg-transparent hover:bg-green-500 hover:text-white"
                 >
                   ✔
                 </button>
                 <button
                   onClick={undo}
-                  className="btn-square btn-sm btn border-0 bg-transparent hover:bg-slate-600 "
+                  className="hover: btn-square btn-sm btn border-0 bg-transparent hover:bg-secondary "
                 >
                   🔁
                 </button>

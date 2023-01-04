@@ -35,7 +35,7 @@ export default function NewTask() {
       >
         add
       </button>
-      <div className="btn-square btn">{tasks.length}</div>
+      <div className=" btn-ghost btn-square btn">{tasks.length}</div>
     </div>
   );
 }

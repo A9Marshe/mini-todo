@@ -4,16 +4,24 @@ import { TasksContext, ThemeContext } from './context/TasksContext';
 import tasksReducer from './hooks/TasksReducer';
 import './App.css'
 
+
+//reading from localStorage
+let localTasks = JSON.parse(localStorage.getItem('tasks-list'));
+localTasks = localTasks === null ? [] : localTasks;
+let localTheme = JSON.parse(localStorage.getItem('theme-mode'));
+localTheme = localTheme === null ? 'light' : localTheme;
 export default function App() {
-  const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
-  const headId = useRef(tasks.length);
-  const [theme, setTheme] = useState('dark');
+  const [theme, setTheme] = useState(localTheme);
+  const [tasks, dispatch] = useReducer(tasksReducer, localTasks);
+  const headId = useRef(Math.max(tasks.map(e => e.id)));
   useEffect(() => {
-    console.log(`Theme changed! \n`)
-    return () => {
-      console.log(theme);
-    }
+    localStorage.setItem('tasks-list', JSON.stringify(tasks));
+  }, [tasks])
+
+  useEffect(() => {
+    localStorage.setItem('theme-mode', JSON.stringify(theme))
   }, [theme])
+
 
   function toggleTheme() {
     (theme === "light") ? setTheme("dark") : setTheme("light")

@@ -1,3 +1,24 @@
+import BriefCard from "@/components/tasks/briefCard";
+import { CircleCheck } from "lucide-react";
+
 export default async function MainPage() {
-  return <div className=" bg-blue-400 w-full h-full">MainPage </div>;
+  const user = "Alex";
+  return (
+    <div className="w-full h-full flex-col grid md:grid-cols-5 grid-cols-1 gap-2 auto-rows-max ">
+      <div className=" col-span-1  md:col-span-5 max-h-fit ">
+        <h1> welcome back, {user}</h1>
+        <div className="p-2 ring-2 rounded-md flex gap-2 wrap max-w-full">
+          <BriefCard variant="backlog" Icon={CircleCheck} />
+          <BriefCard variant="in_process" Icon={CircleCheck} />
+          <BriefCard variant="on_going" Icon={CircleCheck} />
+          <BriefCard variant="completed" Icon={CircleCheck} />
+        </div>
+      </div>
+
+      <div className="bg-pink-500 auto-rows-max col-span-1 md:col-span-3 ">
+        dsa
+      </div>
+      <div className="bg-green-500 col-span-1 md:col-span-2 "> time chart</div>
+    </div>
+  );
 }

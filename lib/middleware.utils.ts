@@ -1,6 +1,6 @@
 import { i18n } from "@/i18n-config";
 import { NextRequest, NextResponse } from "next/server";
-import { extractLocaleFromUrl } from "./utils/i18n";
+import { extractLocaleFromUrl } from "./utils/i18n.utils";
 
 export default async function localizeRequest(request: NextRequest) {
   const hasLocale = extractLocaleFromUrl(request);

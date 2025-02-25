@@ -1,5 +1,5 @@
 export const i18n = {
-  defaultLocale: "ar",
+  defaultLocale: process.env.NEXT_PUBLIC_DEFAULT_LOCALE ?? "en",
   locales: ["en", "ar"],
 } as const;
 

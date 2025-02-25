@@ -6,7 +6,7 @@ export default async function ProtectedLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className=" bg-blue-400 w-full h-full">
+    <div className="w-full h-full flex flex-col ">
       <Header />
       {children}
     </div>

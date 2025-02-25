@@ -3,5 +3,5 @@ export default function SettingsLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <div className=" bg-blue-400 w-full h-full">settings layout </div>;
+  return <div className=" w-full h-full">{children}</div>;
 }

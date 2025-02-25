@@ -27,7 +27,6 @@ export default async function RootLayout({
 }) {
   const lang = (await params).language;
   const cookieStore = await cookies();
-  // const dict = await getDictionary(lang);
   const theme = cookieStore.get("theme")?.value ?? "light";
   return (
     <html

@@ -1,4 +1,5 @@
 import BriefCard from "@/components/tasks/briefCard";
+import RecentTasks from "@/components/tasks/recentTasks";
 import { CircleCheck } from "lucide-react";
 
 export default async function MainPage() {
@@ -15,8 +16,8 @@ export default async function MainPage() {
         </div>
       </div>
 
-      <div className="bg-pink-500 auto-rows-max col-span-1 md:col-span-3 ">
-        dsa
+      <div className=" min-h-[50dvh]  auto-rows-max col-span-1 md:col-span-3 ">
+        <RecentTasks />
       </div>
       <div className="bg-green-500 col-span-1 md:col-span-2 "> time chart</div>
     </div>

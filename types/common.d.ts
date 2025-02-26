@@ -1,5 +1,5 @@
 // TASK-RELATED TYPES
-export type taskStatus = "ongoing" | "in progress" | "completed" | "canceled";
+export type taskStatus = "ongoing" | "in_progress" | "completed" | "backlog";
 
 export interface task {
   id: string;
@@ -7,7 +7,8 @@ export interface task {
   dateCreated: string;
   dueDate?: string;
   status: taskStatus;
-  workIntervals: { beginDateTime: string; endDateTime: string }[];
+  project?: string;
+  workIntervals: { beginTime: string; endTime: string; date: string }[];
 }
 
 export type tasks = task[];

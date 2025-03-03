@@ -21,8 +21,10 @@ export const metadata: Metadata = {
 export default async function RootLayout({
   children,
   params,
+  modal,
 }: {
   children: React.ReactNode;
+  modal: React.ReactNode;
   params: Promise<{ language: "en" | "ar" }>;
 }) {
   const lang = (await params).language;
@@ -41,6 +43,7 @@ export default async function RootLayout({
     >
       <body className=" bg-background text-foreground w-screen h-screen">
         {children}
+        {modal}
       </body>
     </html>
   );

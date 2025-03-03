@@ -53,8 +53,8 @@ interface BasicTableProps {
 }
 export default function BasicTasksTable({ rows }: BasicTableProps) {
   return rows?.length > 0 ? (
-    <Table>
-      <TableHeader>
+    <Table className="rounded-md">
+      <TableHeader className="sticky top-0 bg-background/90 backdrop-blur-md ">
         <TableRow>
           <TableHead className="w-[100px]">task</TableHead>
           <TableHead>status</TableHead>
@@ -65,7 +65,7 @@ export default function BasicTasksTable({ rows }: BasicTableProps) {
       </TableHeader>
       <TableBody>
         {rows.map((row) => (
-          <BasicTaskRow {...row} />
+          <BasicTaskRow key={row.id} {...row} />
         ))}
       </TableBody>
     </Table>

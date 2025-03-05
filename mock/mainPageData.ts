@@ -91,4 +91,9 @@ const basicTasksCard: BasicTaskRowProps[] = [
   },
 ];
 
-export { basicTasksCard };
+const chartData = [
+  { project: "p1", hours: 16, fill: "var(--color-p1)" },
+  { project: "p2", hours: 10, fill: "var(--color-p2)" },
+  { project: "p3", hours: 25, fill: "var(--color-p3)" },
+];
+export { basicTasksCard, chartData };

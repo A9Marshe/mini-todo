@@ -14,7 +14,7 @@ import BasicTasksTable from "./BasicTasksTable";
 
 export default async function RecentTasks() {
   return (
-    <Card className=" w-full h-full flex flex-col max-h-[50dvh]  justify-between">
+    <Card className=" w-full min-h-full flex flex-col max-h-[50dvh]  justify-between">
       <CardHeader className="p-2 px-4 flex items-center flex-row gap-4 ">
         <CardTitle className="text-xl">Recent tasks</CardTitle>
         <CardDescription>view your recent tasks</CardDescription>
